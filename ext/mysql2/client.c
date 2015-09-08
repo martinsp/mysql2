@@ -1210,6 +1210,7 @@ static VALUE initialize_ext(VALUE self) {
 }
 
 void init_mysql2_client() {
+#ifdef _WIN32
   /* verify the libmysql we're about to use was the version we were built against
      https://github.com/luislavena/mysql-gem/commit/a600a9c459597da0712f70f43736e24b484f8a99 */
   int i;
@@ -1227,6 +1228,7 @@ void init_mysql2_client() {
       return;
     }
   }
+#endif
 
   /* Initializing mysql library, so different threads could call Client.new */
   /* without race condition in the library */
